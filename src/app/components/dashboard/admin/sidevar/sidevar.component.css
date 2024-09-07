@@ -6,8 +6,9 @@
   /* Estilo para la barra lateral */
   .mat-sidenav {
     width: 280px; /* Ancho de la barra lateral */
-    background-color: #343A40; /* Color gris pizarra */
+    /*background-color: #343A40; /* Color gris pizarra */
     color: white; /* Color del texto en la barra lateral */
+    background-color: #5CB8FF;
 }
 
   /* Estilo para los elementos activos del menú */
@@ -18,6 +19,7 @@
   /* Estilo para el contenido principal */
   .mat-sidenav-content {
     padding: 20px; /* Espaciado interior del contenido principal */
+    background-color: #fff;
   }
   
   .texto-blanco {
