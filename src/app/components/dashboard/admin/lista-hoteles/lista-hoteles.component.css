@@ -25,9 +25,10 @@
   }
 
   .table {
-    border: 2px solid hsl(219, 89%, 59%);
+    /*border: 2px solid hsl(219, 89%, 59%);*/
     border-radius: 8px;
     overflow: hidden;
+    border: none !important;
   }
 .activo {
   background-color: #d4edda; /* Verde claro */

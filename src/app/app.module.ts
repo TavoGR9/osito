@@ -16,6 +16,11 @@ import { MatSortModule } from '@angular/material/sort';
 import { RouterModule } from '@angular/router'; // Asegúrate de importar esto
 import { ListaSitiosTuristicosComponent } from './components/dashboard/admin/lista-sitios-turisticos/lista-sitios-turisticos.component';
 import { ListaHotelesComponent } from './components/dashboard/admin/lista-hoteles/lista-hoteles.component';
+import { ModalAgregarHotelComponent } from './modales/modal-agregar-hotel/modal-agregar-hotel.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -25,6 +30,7 @@ import { ListaHotelesComponent } from './components/dashboard/admin/lista-hotele
     SidevarComponent,
     ListaSitiosTuristicosComponent,
     ListaHotelesComponent,
+    ModalAgregarHotelComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +44,10 @@ import { ListaHotelesComponent } from './components/dashboard/admin/lista-hotele
     MatTableModule,
     MatListModule,
     HttpClientModule,
+    MatDialogModule,
+    FormsModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

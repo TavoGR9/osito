@@ -8,11 +8,14 @@ import { Observable } from 'rxjs';
 export class HotelServiceService {
 
 
-  private apiUrl = 'http://localhost/hotelreservation/ObtenerHotelesPorLugar.php?lugares';
+  private apiUrl = 'http://localhost/hotelreservation/';
   constructor(private http: HttpClient) {}
 
-  // Método para obtener los hoteles por lugar
   getHoteles(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
+  }
+
+  getAllHoteles(): Observable<any>{
+    return this.http.get<any>(this.apiUrl + 'ObtenerHotelesPorLugar.php?hoteles');
   }
 }

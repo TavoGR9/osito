@@ -1,13 +1,17 @@
+<div class="section-add">
+  <button mat-raised-button color="accent" (click)="abrirModalAgregarHotel()">Agregar</button>
+</div>
+
 <table mat-table [dataSource]="dataSource" matSort class="table table-striped table-hover mat-elevation-z8" style="border: 2px solid hsl(194, 78%, 46%); border-radius: 8px;">
- 
+  
   <ng-container matColumnDef="nombre">
     <th mat-header-cell *matHeaderCellDef style="background-color: hsl(219, 89%, 59%); color: white;" class="text-uppercase"> Nombre del hotel</th>
-    <td mat-cell *matCellDef="let item" class="align-middle">{{ item.nombre }}</td>
+    <td mat-cell *matCellDef="let item" class="align-middle">{{ item.nombre_hotel }}</td>
   </ng-container>
 
   <ng-container matColumnDef="sitio">
     <th mat-header-cell *matHeaderCellDef style="background-color: hsl(219, 89%, 59%); color: white;" class="text-uppercase"> Sitio turistico</th>
-    <td mat-cell *matCellDef="let item" class="align-middle">{{ item.sitio }}</td>
+    <td mat-cell *matCellDef="let item" class="align-middle">{{ item.nombre_lugar }}</td>
   </ng-container>
 
   <!-- Header Row -->
