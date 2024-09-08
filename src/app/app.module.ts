@@ -21,6 +21,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { InformacionClienteComponent } from './components/dashboard/cliente/informacion-cliente/informacion-cliente.component';
+
+
 
 
 @NgModule({
@@ -31,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
     ListaSitiosTuristicosComponent,
     ListaHotelesComponent,
     ModalAgregarHotelComponent,
+    InformacionClienteComponent,
   ],
   imports: [
     BrowserModule,

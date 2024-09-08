@@ -1,47 +1,42 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav mode="side" opened>
-      <br>
-     
-  
-      <mat-nav-list>
-        <p style="margin-top: 4%; text-align: left; padding-left: 30px; color: #CCCCCC; font-size: 12px; display: flex; align-items: center;">
-          <mat-icon style="margin-right: 25px; font-size: 16px;">place</mat-icon>
-          Reservaciones
-        </p>
-        <hr>
-  
-        <button class="hover-orange transparent-button">
-          <mat-icon>home</mat-icon> 
-          Inicio
-        </button>
-  
-        <button class="hover-orange transparent-button" routerLink="./listaHoteles">
-          <mat-icon>location_on</mat-icon> 
-          Hoteles
-        </button>
-  
-        <button class="hover-orange transparent-button" routerLink="./listaTuristicos">
-          <mat-icon>bar_chart</mat-icon> 
-          Sitios turisticos
-        </button>
-  
+  <mat-sidenav mode="side" opened>
+    <br>
+    <mat-nav-list>
+      <p style="margin-top: 4%; text-align: left; padding-left: 30px; color: #CCCCCC; font-size: 12px; display: flex; align-items: center;">
+        <mat-icon style="margin-right: 25px; font-size: 16px;">place</mat-icon>
+        Reservaciones
+      </p>
+      <hr>
 
-  
-        <button class="hover-orange transparent-button" routerLink="./reguser">
-            <mat-icon>person</mat-icon>
-            Registro
-          </button>
-  
-        <button class="hover-orange transparent-button">
-          <mat-icon>power_settings_new</mat-icon> 
-          Cerrar sesión
-        </button>
-      </mat-nav-list>
-    </mat-sidenav>
-  
-    <mat-sidenav-content>
-      <!-- Aquí puedes agregar contenido -->
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  
+      <button class="hover-orange transparent-button" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>home</mat-icon> 
+        Inicio
+      </button>
+
+      <button class="hover-orange transparent-button" routerLink="/listaHoteles" routerLinkActive="active">
+        <mat-icon>location_on</mat-icon> 
+        Hoteles
+      </button>
+
+      <button class="hover-orange transparent-button" routerLink="/listaTuristicos" routerLinkActive="active">
+        <mat-icon>bar_chart</mat-icon> 
+        Sitios turisticos
+      </button>
+
+      <button class="hover-orange transparent-button" routerLink="/reguser" routerLinkActive="active">
+        <mat-icon>person</mat-icon>
+        Registro
+      </button>
+
+      <button class="hover-orange transparent-button">
+        <mat-icon>power_settings_new</mat-icon> 
+        Cerrar sesión
+      </button>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- Aquí puedes agregar contenido -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

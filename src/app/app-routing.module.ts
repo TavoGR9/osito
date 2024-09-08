@@ -5,6 +5,7 @@ import { SidevarComponent } from './components/dashboard/admin/sidevar/sidevar.c
 import { RegistrarUsuarioComponent } from './components/dashboard/admin/registrar-usuario/registrar-usuario.component';
 import { ListaHotelesComponent } from './components/dashboard/admin/lista-hoteles/lista-hoteles.component';
 import { ListaSitiosTuristicosComponent } from './components/dashboard/admin/lista-sitios-turisticos/lista-sitios-turisticos.component';
+import { InformacionClienteComponent } from './components/dashboard/cliente/informacion-cliente/informacion-cliente.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -12,6 +13,8 @@ const routes: Routes = [
   { path: 'reguser', component: RegistrarUsuarioComponent },
   { path: 'listaHoteles', component: ListaHotelesComponent },
   { path: 'listaTuristicos', component: ListaSitiosTuristicosComponent },
+  { path: 'infoCliente', component: InformacionClienteComponent },
+
 
 
 
