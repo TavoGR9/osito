@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HotelServiceService } from 'src/app/services/hotel-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAgregarHotelComponent } from 'src/app/modales/modal-agregar-hotel/modal-agregar-hotel.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-lista-hoteles',
@@ -9,30 +11,27 @@ import { ModalAgregarHotelComponent } from 'src/app/modales/modal-agregar-hotel/
   styleUrls: ['./lista-hoteles.component.css']
 })
 export class ListaHotelesComponent implements OnInit {
-
   hoteles: any[] = [];
-
-  dataSource = [
-    { nombre: 'Hotel Las Palmas', sitio: 'Playa del Carmen' },
-    { nombre: 'Hotel Paraíso', sitio: 'Cancún' }
-  ];
-
-  // Definir las columnas que se van a mostrar en la tabla
+  dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = ['nombre', 'sitio'];
+  
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
 
-  constructor(private hotelService: HotelServiceService, public dialog: MatDialog) {}
+  constructor(private hotelService: HotelServiceService, public dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource(this.hoteles);
+  }
 
   ngOnInit(): void {
     this.obtenerHoteles();
+    this.dataSource.sort = this.sort;
   }
-
 
   obtenerHoteles(): void {
     this.hotelService.getAllHoteles().subscribe(
       (data) => {
-        console.log("All hoteles", data); 
+        console.log("All hoteles", data);
         this.hoteles = data;
-        this.dataSource = this.hoteles;
+        this.dataSource.data = this.hoteles;
       },
       (error) => {
         console.error('Error al obtener los hoteles:', error);
@@ -40,19 +39,28 @@ export class ListaHotelesComponent implements OnInit {
     );
   }
 
-  abrirModalAgregarHotel() {
+  filtrarHoteles(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    
+    this.dataSource.filterPredicate = (data: any, filter: string) => {
+      const nombreHotel = data.nombre_hotel.toLowerCase();
+      const nombreLugar = data.nombre_lugar.toLowerCase();
+      return nombreHotel.includes(filter) || nombreLugar.includes(filter);
+    };
+  }
 
+  abrirModalAgregarHotel() {
     const lugaresParaModal = this.hoteles
-    .map(hotel => ({ 
-      id_lugar: hotel.id_lugar, 
-      nombre_lugar: hotel.nombre_lugar 
-    }))
-    .filter((lugar, index, self) => 
-      index === self.findIndex(l => l.id_lugar === lugar.id_lugar)
-    );
+      .map(hotel => ({ 
+        id_lugar: hotel.id_lugar, 
+        nombre_lugar: hotel.nombre_lugar 
+      }))
+      .filter((lugar, index, self) => 
+        index === self.findIndex(l => l.id_lugar === lugar.id_lugar)
+      );
 
     const dialogRef = this.dialog.open(ModalAgregarHotelComponent, {
-      // Puedes configurar opciones del modal aquí, como el tamaño
       width: '700px', 
       height: '500px',
       data: { lugares: lugaresParaModal }
@@ -60,9 +68,10 @@ export class ListaHotelesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Aquí puedes manejar los datos del formulario enviados desde el modal
         console.log('Datos del nuevo hotel:', result);
-        // ... (Lógica para guardar el hotel en tu base de datos)
+        // Aquí puedes agregar la lógica para guardar el nuevo hotel
+        // y actualizar la lista de hoteles
+        this.obtenerHoteles();
       }
     });
   }

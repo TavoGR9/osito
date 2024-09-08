@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,17 @@ export class HotelServiceService {
   }
 
   getAllHoteles(): Observable<any>{
+    
     return this.http.get<any>(this.apiUrl + 'ObtenerHotelesPorLugar.php?hoteles');
   }
+
+  crearHotel(formData: FormData): Observable<any> {
+    const headers = new HttpHeaders({
+      // Aquí puedes agregar encabezados si los necesitas, por ejemplo, autorización
+      // 'Authorization': 'Bearer <token>',
+    });
+
+    return this.http.post(this.apiUrl + 'ObtenerHotelesPorLugar.php', formData, { headers });
+  }
+  
 }
