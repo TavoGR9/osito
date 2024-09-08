@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { InformacionClienteComponent } from './components/dashboard/cliente/informacion-cliente/informacion-cliente.component';
+import { ModalAgregarSitioComponent } from './modales/modal-agregar-sitio/modal-agregar-sitio.component';
 
 
 
@@ -35,6 +36,7 @@ import { InformacionClienteComponent } from './components/dashboard/cliente/info
     ListaHotelesComponent,
     ModalAgregarHotelComponent,
     InformacionClienteComponent,
+    ModalAgregarSitioComponent,
   ],
   imports: [
     BrowserModule,
