@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HotelServiceService } from 'src/app/services/hotel-service.service';
 
 @Component({
   selector: 'app-modal-agregar-hotel',
@@ -29,6 +30,7 @@ export class ModalAgregarHotelComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ModalAgregarHotelComponent>,
+    private hotelService: HotelServiceService,
     @Inject(MAT_DIALOG_DATA) public data: { lugares: any[] }
   ) {
     this.lugares = data.lugares;
@@ -57,39 +59,38 @@ export class ModalAgregarHotelComponent implements OnInit {
   guardarHotel() {
     if (!this.nuevoHotel.imagen) {
       console.error('No se ha seleccionado ninguna imagen');
-      // Aquí puedes mostrar un mensaje de error al usuario
       return;
     }
-
+  
     const formData = new FormData();
-    formData.append('nombre_hotel', this.nuevoHotel.nombre_hotel);
-    formData.append('estrellas', this.nuevoHotel.estrellas.toString());
-    formData.append('direccion', this.nuevoHotel.direccion);
-    formData.append('descripcion_hotel', this.nuevoHotel.descripcion_hotel);
-    if (this.nuevoHotel.id_lugar) {
-      formData.append('id_lugar', this.nuevoHotel.id_lugar.toString());
-    }
+    formData.append('nuevoHotel', JSON.stringify({
+      nombre: this.nuevoHotel.nombre_hotel,
+      descripcion: this.nuevoHotel.descripcion_hotel,
+      direccion: this.nuevoHotel.direccion,
+      estrellas: parseInt(this.nuevoHotel.estrellas),
+      id_lugar: this.nuevoHotel.id_lugar
+    }));
     formData.append('imagen', this.nuevoHotel.imagen, this.nuevoHotel.imagen.name);
 
-    console.log('Datos del formulario:', {
-      nombre_hotel: this.nuevoHotel.nombre_hotel,
-      estrellas: this.nuevoHotel.estrellas,
+  
+    console.log('Datos del hotel:', {
+      nombre: this.nuevoHotel.nombre_hotel,
+      descripcion: this.nuevoHotel.descripcion_hotel,
       direccion: this.nuevoHotel.direccion,
-      descripcion_hotel: this.nuevoHotel.descripcion_hotel,
+      estrellas: parseInt(this.nuevoHotel.estrellas),
       id_lugar: this.nuevoHotel.id_lugar,
-      imagen: this.nuevoHotel.imagen ? this.nuevoHotel.imagen.name : 'No se seleccionó imagen'
     });
-
-    // Aquí llamarías a tu servicio para enviar los datos
-    // this.hotelService.crearHotel(formData).subscribe(
-    //   (response) => {
-    //     console.log('Hotel creado con éxito', response);
-    //     this.dialogRef.close(true);
-    //   },
-    //   (error) => {
-    //     console.error('Error al crear el hotel', error);
-    //     // Mostrar mensaje de error al usuario
-    //   }
-    // );
+    console.log('Imagen seleccionada:', this.nuevoHotel.imagen);
+  
+    this.hotelService.crearHotel(formData).subscribe(
+      (response: any) => {
+        console.log('Hotel creado con éxito', response);
+        this.dialogRef.close(true);
+      },
+      (error: any) => {
+        console.error('Error al crear el hotel', error);
+        alert('Error al crear el hotel: ' + error);
+      }
+    );
   }
 }
